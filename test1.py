@@ -7,28 +7,33 @@ from sklearn.svm import LinearSVC
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.preprocessing import MultiLabelBinarizer
+import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn import tree
+from sklearn.naive_bayes import GaussianNB
 
 
-
-X_train = np.array(["for(int i = 0; i < 5; i++){}",
-                    "for row in data.rows():",
+X_train = np.array(["for(int x = 0; x < 5; x++){}",
+                    "for x in data.rows():",
                     "public static void main(String[] args){",
-                    "if testVar == 5:",
-                    "if(testingVar = 5){return 2*5;}",
-                    "elif answers == 7:",
+                    "if x == 5:",
+                    "if(x == 5){}",
+                    "elif x == 7:",
                     "} else {",
                     "else:",
                     "void applyBrakes() {",
                     "def main(argv):",
-                    "while(all && i < val.length()){",
-                    "while (count < 9):",
-                    "int i = 0;",
-                    "i = 0"])
+                    "while(all && x < val.length()){",
+                    "while (x < 5):",
+                    "int x = 0;",
+                    "x = 0"])
+
 y_train = [["Java"],["Python"],["Java"],["Python"],["Java"],["Python"],["Java"],["Python"],["Java"],["Python"],["Java"],["Python"],["Java"],["Python"]]
+
 X_test = np.array(['int var = 10;',
-                   'if alex:',
-                   'for i in range(5):'])   
-target_names = ['Java', 'Python']
+                   'if emmett:',
+                   'if(alex == 4){}else{}'])   
 
 mlb = MultiLabelBinarizer()
 Y = mlb.fit_transform(y_train)
@@ -37,6 +42,11 @@ classifier = Pipeline([
     ('vectorizer', CountVectorizer()),
     ('tfidf', TfidfTransformer()),
     ('clf', OneVsRestClassifier(LinearSVC()))])
+
+# classifier = KNeighborsClassifier(n_neighbors=7, algorithm='auto')
+# classifier = DecisionTreeClassifier(max_depth=10)
+# classifier = GaussianNB()
+# classifier = CountVectorizer()
 
 classifier.fit(X_train, Y)
 predicted = classifier.predict(X_test)
