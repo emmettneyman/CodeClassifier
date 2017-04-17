@@ -19,10 +19,13 @@ data_list = []
 target_list = []
 for f in listdir("training_data"):
     fp = open("training_data/" + f, "r")
-    target_list.append([fp.readline()])
-    data_list.append(fp.read())
+    target = [fp.readline().strip()]
+    for line in fp:
+        data_list.append(line)
+        target_list.append(target)
 
 data_array = np.array(data_list)
+print(target_list)
 
 
 
@@ -48,7 +51,7 @@ X_test = np.array(['int var = 10;',
                    'if(alex == 4){}else{}'])   
 
 mlb = MultiLabelBinarizer()
-Y = mlb.fit_transform(y_train)
+Y = mlb.fit_transform(target_list)
 
 classifier = Pipeline([
     ('vectorizer', CountVectorizer()),
@@ -60,9 +63,10 @@ classifier = Pipeline([
 # classifier = GaussianNB()
 # classifier = CountVectorizer()
 
-classifier.fit(X_train, Y)
+classifier.fit(data_array, Y)
 predicted = classifier.predict(X_test)
 all_labels = mlb.inverse_transform(predicted)
+print(predicted)
 
 for item in all_labels:
 	print(item)
