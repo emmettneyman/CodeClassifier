@@ -21,34 +21,18 @@ for f in listdir("training_data"):
     fp = open("training_data/" + f, "r")
     target = [fp.readline().strip()]
     for line in fp:
-        data_list.append(line)
-        target_list.append(target)
+        line = line.strip(' \t\n')
+        if not line or line[0] == "#" or line[0] == "/" or line[0] == "*" or line[0] == "-" or line[0] == "{":
+            continue
+        else:
+            data_list.append(line)
+            target_list.append(target)
 
 data_array = np.array(data_list)
-print(target_list)
 
-
-
-X_train = np.array(["for(int x = 0; x < 5; x++){}",
-                    "for x in data.rows():",
-                    "public static void main(String[] args){",
-                    "if x == 5:",
-                    "if(x == 5){}",
-                    "elif x == 7:",
-                    "} else {",
-                    "else:",
-                    "void applyBrakes() {",
-                    "def main(argv):",
-                    "while(all && x < val.length()){",
-                    "while (x < 5):",
-                    "int x = 0;",
-                    "x = 0"])
-
-y_train = [["Java"],["Python"],["Java"],["Python"],["Java"],["Python"],["Java"],["Python"],["Java"],["Python"],["Java"],["Python"],["Java"],["Python"]]
-
-X_test = np.array(['int var = 10;',
-                   'if emmett:',
-                   'if(alex == 4){}else{}'])   
+X_test = np.array(['public class Node implements BSTNode {',
+                   'formats :: Formatter -> Map.Map x (IO Formatter)',
+                   'Select Distinct x, y'])   
 
 mlb = MultiLabelBinarizer()
 Y = mlb.fit_transform(target_list)
@@ -58,27 +42,14 @@ classifier = Pipeline([
     ('tfidf', TfidfTransformer()),
     ('clf', OneVsRestClassifier(LinearSVC()))])
 
-# classifier = KNeighborsClassifier(n_neighbors=7, algorithm='auto')
-# classifier = DecisionTreeClassifier(max_depth=10)
-# classifier = GaussianNB()
-# classifier = CountVectorizer()
-
 classifier.fit(data_array, Y)
 predicted = classifier.predict(X_test)
 all_labels = mlb.inverse_transform(predicted)
+
 print(predicted)
 
 for item in all_labels:
 	print(item)
-
-
-# def main(argv):
-# 	print(argv[0])
-# 	print(type(argv[0]))
-
-# if __name__ == "__main__":
-#    main(sys.argv[1:])
-
 
 
 
