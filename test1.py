@@ -12,6 +12,18 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn import tree
 from sklearn.naive_bayes import GaussianNB
+from os import listdir
+
+
+data_list = []
+target_list = []
+for f in listdir("training_data"):
+    fp = open("training_data/" + f, "r")
+    target_list.append([fp.readline()])
+    data_list.append(fp.read())
+
+data_array = np.array(data_list)
+
 
 
 X_train = np.array(["for(int x = 0; x < 5; x++){}",
