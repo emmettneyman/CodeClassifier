@@ -22,16 +22,17 @@ for f in listdir("training_data"):
     target = [fp.readline().strip()]
     for line in fp:
         line = line.strip(' \t\n')
-        if not line or line[0] == "#" or line[0] == "/" or line[0] == "*" or line[0] == "-" or line[0] == "{":
+        if not line or line[0] == "#" or line[0] == "/" or line[0] == "*" or line[0] == "-" or line[0] == "{" or line[0] == "}":
             continue
         else:
+            # print(line)
             data_list.append(line)
             target_list.append(target)
 
 data_array = np.array(data_list)
 
-X_test = np.array(['public class Node implements BSTNode {',
-                   'formats :: Formatter -> Map.Map x (IO Formatter)',
+X_test = np.array(['return x;', 'public class Node implements BSTNode {',
+                   'formats :: F -> Map.Map x (IO Formatter)',
                    'Select Distinct x, y'])   
 
 mlb = MultiLabelBinarizer()

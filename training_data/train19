@@ -1,8 +1,5 @@
 sql
-/*
---RUN ONCE ONLY!!! 
-CREATE SCHEMA acs2012_1yr;
-*/
+
 
 SET search_path = acs2012_1yr, public;
 SET client_encoding = 'LATIN1';

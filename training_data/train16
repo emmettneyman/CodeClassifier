@@ -1,7 +1,5 @@
 sql
-/****************************************
-THIS SCRIPT IS CURRENTLY INCOMPLETE.
-****************************************/
+
 SET search_path = public;
 
 --CREATE DDL FOR STORAGE BY ARRAY COLUMNS
@@ -34,15 +32,9 @@ END;
 $function$ LANGUAGE plpgsql;
 
 /********************************************************************
-Currently editing this function
 *********************************************************************/
 
-/*CREATE TABLE appears above. Table should be populated first with
-geoheader data using 
 
-SELECT sql_parse_tmp_geoheader(TRUE, 'by_arrays');
-
-This function adds data to columns with UPDATE statements.*/
 DROP FUNCTION IF EXISTS sql_insert_into_array_columns(boolean);
 CREATE FUNCTION sql_insert_into_array_columns(exec boolean = FALSE) RETURNS text AS $function$
 DECLARE
