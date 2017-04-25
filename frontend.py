@@ -3,18 +3,21 @@
 
 from flask import Flask, render_template, request, redirect, url_for, json, jsonify
 import requests
-import logging
+import classifier
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
+    global classify
+    classify = classifier.classifier(classifier.target_list, classifier.data_array)
     return render_template('index.html', code = "")
 
 @app.route('/', methods = ['POST'])
 def my_form_post():
-    code = request.form['code']
-    return render_template('index.html', code = code)
+    classify.predictCode(request.form['code'])
+    result = classify.returnPrediction()
+    return render_template('index.html', code = result)
 
 def main():
     app.debug = True

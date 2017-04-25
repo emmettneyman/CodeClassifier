@@ -53,7 +53,8 @@ class classifier():
 		self.classifier.fit(dataarray, self.Y)
 
 	def predictCode(self, xtest):
-		self.predicted = self.classifier.predict(xtest)
+		X_test = np.array([xtest])
+		self.predicted = self.classifier.predict(X_test)
 		self.all_labels = self.mlb.inverse_transform(self.predicted)
 		self.history[xtest[0]] = self.all_labels[0]
 
@@ -62,28 +63,28 @@ class classifier():
 			if item:
 				item = item[0]
 				item = item.replace(',', '')
-				print(item)
+				return item
 			else:
-				print('Input code is too generic to be matched, srry m8.')
+				return 'Input code is too generic to be matched, srry m8.'
 
 	def __str__(self):
 		print('This is a classifier object, here is the history of searches: ')
 		for i in self.history:
 			print('code: ' + str(i) + ' , result: ' + str(self.history[i][0]))
 
-print('Welcome to the code classifier!')
-classifier = classifier(target_list, data_array)
-userInput = input('Enter line of code: ')
-X_test = np.array([userInput])
-classifier.predictCode(X_test)
-classifier.returnPrediction()
+# print('Welcome to the code classifier!')
+# classifier = classifier(target_list, data_array)
+# userInput = input('Enter line of code: ')
+# X_test = np.array([userInput])
+# classifier.predictCode(X_test)
+# classifier.returnPrediction()
 
-userInput = input('Enter line of code: ')
-X_test = np.array([userInput])
-classifier.predictCode(X_test)
-classifier.returnPrediction()
+# userInput = input('Enter line of code: ')
+# X_test = np.array([userInput])
+# classifier.predictCode(X_test)
+# classifier.returnPrediction()
 
-classifier.__str__()
+# classifier.__str__()
 
 
 
