@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            Code Classifier
+        </title>
+        <link rel="stylesheet" href="static/style.css">
+    </head>
+    <body> 
+        <h1 class="title">
+            Classify Your Code!
+        </h1>   
+        <div class="container">
+            <br>
+            <form action="." method="POST">
+                Enter your code here
+                <input type="text" class="input-text" name="code" style="width: 600px;">
+                <button type="submit" class="buttons" name="code-form" value="Enter">Submit</button>
+            </form>
+        </div>
+
+        <div>
+            <br>
+            <br>
+            {{ code }}
+        </div>
+    </body>
+</html>

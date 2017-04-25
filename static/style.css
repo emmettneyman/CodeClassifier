@@ -1,0 +1,37 @@
+@import "https://fonts.googleapis.com/css?family=Josefin+Sans";
+
+body {
+  margin: 0 auto;
+  max-width: 50em;
+  font-family: "Josefin Sans", sans-serif;
+  background-color: #FED6F1;
+  color: black;
+  text-align: center;
+  font-size: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+div.container {
+  background-color: #ffffff;
+  margin-top: 10px;
+  border-style: solid;
+  border-width: 1px;
+  padding-bottom: 14px;
+}
+input.input-text {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+  
+}
+button.buttons {
+font-size: 16px;
+height: auto;
+margin-bottom: 15px;
+padding: 7px 9px;
+background-color: #eeeeee;
+}
