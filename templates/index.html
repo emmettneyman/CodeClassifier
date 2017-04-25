@@ -21,8 +21,22 @@
 
         <div>
             <br>
+            Result:
             <br>
             {{ code }}
+        </div>
+        <br>
+        <br>
+        <div class="container">
+            <br>
+            Past Queries
+            <br>
+            <ul>
+                {% for item in past.splitlines()[::-1] %}
+                <li> {{item}} </li>
+                {% endfor %}
+            </ul>
+            <br>
         </div>
     </body>
 </html>

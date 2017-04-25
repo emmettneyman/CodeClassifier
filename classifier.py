@@ -54,7 +54,7 @@ class classifier():
         X_test = np.array([xtest])
         self.predicted = self.classifier.predict(X_test)
         self.all_labels = self.mlb.inverse_transform(self.predicted)
-        self.history[xtest[0]] = self.all_labels[0]
+        self.history[xtest] = self.all_labels[0]
 
     def returnPrediction(self):
         for item in self.all_labels:
@@ -66,6 +66,10 @@ class classifier():
                 return 'Input code is too generic to be matched'
 
     def __str__(self):
-        print('This is a classifier object, here is the history of searches: ')
+        if len(self.history) == 0:
+            return "No queries"
+        string_to_return = ''
         for i in self.history:
-            print('code: ' + str(i) + ' , result: ' + str(self.history[i][0]))
+            string_to_return = string_to_return + 'code: ' + str(i) +\
+                ' , result: ' + str(self.history[i][0]) + '\n'
+        return string_to_return

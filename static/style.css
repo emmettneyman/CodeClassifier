@@ -29,9 +29,12 @@ input.input-text {
   
 }
 button.buttons {
-font-size: 16px;
-height: auto;
-margin-bottom: 15px;
-padding: 7px 9px;
-background-color: #eeeeee;
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+  background-color: #eeeeee;
 }
+
+ul {
+  list-style-type: none;
