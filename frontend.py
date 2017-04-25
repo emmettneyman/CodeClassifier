@@ -18,8 +18,11 @@ def home():
 @app.route('/', methods=['POST'])
 def my_form_post():
     global classify
-    classify.predictCode(request.form['code'])
-    result = classify.returnPrediction()
+    user_input = requet.form['code']
+    result = ''
+    if user_input:
+        classify.predictCode(user_input)
+        result = classify.returnPrediction()
     return render_template('index.html', code=result)
 
 
