@@ -39,7 +39,7 @@ data_array = np.array(data_list)
 
 class classifier():
 
-    history = {}
+    history = []
 
     def __init__(self, targetlist, dataarray):
         self.mlb = MultiLabelBinarizer()
@@ -54,7 +54,7 @@ class classifier():
         X_test = np.array([xtest])
         self.predicted = self.classifier.predict(X_test)
         self.all_labels = self.mlb.inverse_transform(self.predicted)
-        self.history[xtest] = self.all_labels[0]
+        self.history.append((xtest, self.all_labels))
 
     def returnPrediction(self):
         for item in self.all_labels:
@@ -69,7 +69,12 @@ class classifier():
         if len(self.history) == 0:
             return "No queries"
         string_to_return = ''
-        for i in self.history:
-            string_to_return = string_to_return + 'code: ' + str(i) +\
-                ' , result: ' + str(self.history[i][0]) + '\n'
+        self.history.sort()
+        for (c,l) in self.history:
+            if l[0]:
+                lstr = str(l[0][0])
+            else:
+                lstr = "too generic"
+            string_to_return = string_to_return + 'code: ' + str(c) +\
+                ' , result: ' + lstr + '\n'
         return string_to_return

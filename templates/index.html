@@ -32,7 +32,7 @@
             Past Queries
             <br>
             <ul>
-                {% for item in past.splitlines()[::-1] %}
+                {% for item in past.splitlines() %}
                 <li> {{item}} </li>
                 {% endfor %}
             </ul>
